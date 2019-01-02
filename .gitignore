@@ -4,3 +4,4 @@ initrd/*
 isofiles/*
 preseed2iso.sh
 stretch-preseed.txt
+*.swp
