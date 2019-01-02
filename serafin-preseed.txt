@@ -210,6 +210,7 @@ d-i partman-auto/expert_recipe string                         \
                       $primary{ } $bootable{ }                \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
+                      label{ root }                           \
                       mountpoint{ / }                         \
               .                                               \
               1024 2048 200% linux-swap                       \
@@ -222,6 +223,9 @@ d-i partman-auto/expert_recipe string                         \
                       lv_name{ tmp }                          \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
+                      options/nodev{ nodev }                  \
+                      options/nosuid{ nosuid }                \
+                      label{ tmp }                            \
                       mountpoint{ /tmp }                      \
               .                                               \
               2048 5120 10240 ext4                            \
@@ -229,6 +233,7 @@ d-i partman-auto/expert_recipe string                         \
                       lv_name{ home }                         \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
+                      label{ home }                           \
                       mountpoint{ /home }                     \
               .                                               \
               10240 15360 -1 ext4                             \
@@ -236,6 +241,7 @@ d-i partman-auto/expert_recipe string                         \
                       lv_name{ var }                          \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
+                      label{ var }                            \
                       mountpoint{ /var }                      \
               . \
 
@@ -431,5 +437,9 @@ d-i cdrom-detect/eject boolean true
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
 #d-i preseed/late_command string apt-install zsh; in-target chsh -s /bin/zsh
+d-i preseed/late_command \
+        in-target apt-file update; \
+        in-target passwd --expire serafin; \
+        in-target passwd --expire root
 
 # vi:filetype=cfg
