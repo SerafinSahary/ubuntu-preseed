@@ -1,1 +1,21 @@
 preseed/url=http://jarek.wencel.org/ubuntu/serafin-preseed.txt
+
+language  debian-installer/language
+country   debian-installer/country
+locale    debian-installer/locale
+url       preseed/url
+domain    netcfg/get_domain
+hostname  netcfg/get_hostname
+interface netcfg/choose_interface
+keymap    keyboard-configuration/xkb-keymap
+
+d-i partman-auto/expert_recipe string \
+    lvm-spare :: \
+        128 512 256 ext3 $defaultignore{ } $primary{ } $bootable{ } method{ format } format{ } use_filesystem{ } filesystem{ ext3 } mountpoint{ /boot } . \
+        70 800 280 ext3 $lvmok{ } $primary{ } $bootable{ } method{ format } format{ } use_filesystem{ } filesystem{ ext3 } mountpoint{ / } . \
+        500 3000 5000 ext3 $lvmok{ } method{ format } format{ } use_filesystem{ } filesystem{ ext3 } mountpoint{ /usr } . \
+        70 1500 3000 ext3 $lvmok{ } method{ format } format{ } use_filesystem{ } filesystem{ ext3 } mountpoint{ /var } . \
+        256 1024 300% linux-swap $lvmok{ } method{ swap } format{ } . \
+        70 1500 3000 ext3 $lvmok{ } method{ format } format{ } use_filesystem{ } filesystem{ ext3 } mountpoint{ /home } . \
+        100 10000 1000000000 ext2 $lvmok{ } method{ keep } .
+
