@@ -1,4 +1,4 @@
-preseed/url=http://jarek.wencel.org/ubuntu/serafin-preseed.txt
+url=http://hostname.fqdn.or.ip/ubuntu/serafin-preseed.txt language=en hostname=ubuntu1804 keymap=us
 
 language  debian-installer/language
 country   debian-installer/country
