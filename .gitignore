@@ -1,7 +1,6 @@
 chuckn246-preseed.cfg
 example-preseed.txt
-initrd/*
-isofiles/*
 preseed2iso.sh
 stretch-preseed.txt
 *.swp
+mini.iso
